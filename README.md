@@ -1,88 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em;
-        }
-
-        section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-        }
-
-        #admin-info {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            text-align: left;
-        }
-        .social-icon {
-      width: 54px; /* Adjust the size as needed */
-      height: 50px;
-      margin: 10px;
-      cursor: pointer;
-    }
-    button{
-        background-color: #f4f4f4;
-    }
-    </style>
-    <script>
-        function redirectToAdminEmail() {
-            // Replace the admin's email address with the actual email address
-            var adminEmail = 'vedbhogayta7@gmail.com';
-            window.location.href = 'mailto:' + adminEmail;
-        }
-        // Function to redirect to WhatsApp
-    function redirectToWhatsApp() {
-      window.location.href = 'https://api.whatsapp.com/send?phone=6353074867'; // Replace with your WhatsApp link
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    // Function to redirect to Instagram
-    function redirectToInstagram() {
-      window.location.href = 'https://www.instagram.com/_ved_bhogayta_/'; // Replace with your Instagram profile link
+    #adminContainer {
+      text-align: center;
     }
-    </script>
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4caf50;
+      color: white;
+    }
+  </style>
+  <script>
+    function showUserPage() {
+      window.location.href = "index.html";
+    }
+
+    function displayAllUsers() {
+      // Retrieve all users from localStorage
+      var users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Display user data in a table
+      var table = "<table><tr><th>User ID</th><th>Mobile Number</th><th>Name</th><th>Password</th><th>Backup Code</th><th>Email</th></tr>";
+
+      for (var i = 0; i < users.length; i++) {
+        table += "<tr><td>" + users[i].userId + "</td><td>" + users[i].mobileNumber + "</td><td>" + users[i].name + "</td><td>" + users[i].password + "</td><td>" + users[i].backupCode + "</td><td>" + users[i].email + "</td></tr>";
+      }
+
+      table += "</table>";
+
+      // Display the table in the adminContainer
+      document.getElementById("adminContainer").innerHTML = table;
+    }
+  </script>
 </head>
 <body>
-
-    <header>
-        <h1>Contect To Admin</h1>
-    </header>
-
-    <section>
-        <div id="admin-info">
-            <h2>Admin Information</h2>
-            <p><strong>Name:</strong> ved bhogayta</p>
-            <p><strong>Email:</strong> <a href="javascript:void(0);" onclick="redirectToAdminEmail()">vedbhogayta7@gmail.com</a></p>
-            <p><strong>Address:</strong> 45 Main St Road, City : Bhanvad , Zip Code : 360-510 (Gujarat).</p>
-            <p><strong>Description:</strong> Full Website Hendelling ved bhogayta, Admin : ved bhogayta , Employee : Ved bhogayta , Thank you Team Igtradingmaster</p><ul></ul>
-        <center><button><a href="payment.html">Click To Home</a></button></center>
-        </div>
-    </section>
-<center><!-- WhatsApp Icon -->
-<img class="social-icon" src="C:\Users\vedbh\OneDrive\Desktop\trading\images\whatshapp icon.png" alt="WhatsApp" onclick="redirectToWhatsApp()">
-
-<!-- Instagram Icon -->
-<img class="social-icon" src="C:\Users\vedbh\OneDrive\Desktop\trading\images\instagram icon.png" alt="Instagram" onclick="redirectToInstagram()">
-</center>
+  <div id="adminContainer">
+    <h2>Admin Page</h2>
+    <button onclick="showUserPage()">Back to User Page</button>
+    <button onclick="displayAllUsers()">Display All Users</button>
+  </div>
 </body>
 </html>
