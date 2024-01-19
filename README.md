@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -53,10 +53,12 @@
       background-color: #4caf50;
       color: white;
     }
-  </style>
+    </style>
   <script>
+    // Your existing JavaScript functions here
+
     function showUserPage() {
-      window.location.href = "index.html";
+      window.location.href = "https://igtradingmaster.github.io/LOGIN/";
     }
 
     function displayAllUsers() {
