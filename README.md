@@ -17,35 +17,20 @@
 
     #adminContainer {
       text-align: center;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      border-radius: 8px;
-    }
-
-    button {
-      background-color: #4caf50;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #45a049;
     }
 
     table {
-      width: 100%;
+      width: 80%;
+      margin: 20px auto;
       border-collapse: collapse;
-      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
     }
 
     th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      padding: 12px;
       text-align: left;
     }
 
@@ -53,37 +38,52 @@
       background-color: #4caf50;
       color: white;
     }
-    </style>
+  </style>
+</head>
+<body onload="displayUsers()">
+  <div id="adminContainer">
+    <h2>Admin Page - All Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Mobile Number</th>
+          <th>Name</th>
+          <th>Password</th>
+          <th>Backup Code</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
+  </div>
+
   <script>
-    // Your existing JavaScript functions here
-
-    function showUserPage() {
-      window.location.href = "https://igtradingmaster.github.io/LOGIN/";
-    }
-
-    function displayAllUsers() {
-      // Retrieve all users from localStorage
+    function displayUsers() {
       var users = JSON.parse(localStorage.getItem("users")) || [];
+      var tableBody = document.getElementById("userTableBody");
 
-      // Display user data in a table
-      var table = "<table><tr><th>User ID</th><th>Mobile Number</th><th>Name</th><th>Password</th><th>Backup Code</th><th>Email</th></tr>";
+      // Clear existing rows
+      tableBody.innerHTML = "";
 
-      for (var i = 0; i < users.length; i++) {
-        table += "<tr><td>" + users[i].userId + "</td><td>" + users[i].mobileNumber + "</td><td>" + users[i].name + "</td><td>" + users[i].password + "</td><td>" + users[i].backupCode + "</td><td>" + users[i].email + "</td></tr>";
-      }
+      // Populate the table with user data
+      users.forEach(user => {
+        var row = tableBody.insertRow();
+        var cellUserId = row.insertCell(0);
+        var cellMobileNumber = row.insertCell(1);
+        var cellName = row.insertCell(2);
+        var cellPassword = row.insertCell(3);
+        var cellBackupCode = row.insertCell(4);
+        var cellEmail = row.insertCell(5);
 
-      table += "</table>";
-
-      // Display the table in the adminContainer
-      document.getElementById("adminContainer").innerHTML = table;
+        cellUserId.innerHTML = user.userId;
+        cellMobileNumber.innerHTML = user.mobileNumber;
+        cellName.innerHTML = user.name;
+        cellPassword.innerHTML = user.password;
+        cellBackupCode.innerHTML = user.backupCode;
+        cellEmail.innerHTML = user.email;
+      });
     }
   </script>
-</head>
-<body>
-  <div id="adminContainer">
-    <h2>Admin Page</h2>
-    <button onclick="showUserPage()">Back to User Page</button>
-    <button onclick="displayAllUsers()">Display All Users</button>
-  </div>
 </body>
 </html>
